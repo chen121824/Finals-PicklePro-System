@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Finals 2026 Pickleball</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🏓 PICKLEBALL</h2>
+            <p>Management System</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="active">📊 Dashboard</a>
+            <a href="members.html">👥 Members</a>
+            <a href="inventory.html">📦 Inventory</a>
+            <a href="borrowing-history.html">📋 Borrowing History</a>
+            <a href="reservations.html">🏟️ Reservations</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="settings.html">⚙️ Settings</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="logout.html" class="logout-link">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back, Admin! Here's your overview.</p>
+            </div>
+
+            <div class="admin-info">
+                <span>Administrator</span>
+                <div class="admin-avatar">A</div>
+            </div>
+        </header>
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">👥</div>
+                <div>
+                    <p>Total Members</p>
+                    <h2 id="totalMembers">0</h2>
+                    <small>Registered members</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">🏓</div>
+                <div>
+                    <p>Players Inside Now</p>
+                    <h2 id="playersInside">0</h2>
+                    <small>Currently checked in</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">📦</div>
+                <div>
+                    <p>Total Stock Units</p>
+                    <h2 id="inventoryItems">0</h2>
+                    <small>Total inventory quantity</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✅</div>
+                <div>
+                    <p>Available Stock</p>
+                    <h2 id="availableStock">0</h2>
+                    <small>Ready to be borrowed</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">🏓</div>
+                <div>
+                    <p>Borrowed Stock</p>
+                    <h2 id="borrowedStock">0</h2>
+                    <small>Currently with borrowers</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon red">⏰</div>
+                <div>
+                    <p>Expiring Memberships</p>
+                    <h2 id="expiringMemberships">0</h2>
+                    <small>Needs attention</small>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- DASHBOARD CONTENT -->
+        <section class="dashboard-grid">
+
+            <!-- ATTENDANCE CHART -->
+            <div class="dashboard-card attendance-card">
+                <div class="card-header">
+                    <div>
+                        <h3>Weekly Attendance</h3>
+                        <p>Player attendance overview</p>
+                    </div>
+                    <span class="card-tag">This Week</span>
+                </div>
+
+                
+                <div class="attendance-chart" id="attendanceChart">
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Mon</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Tue</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Wed</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Thu</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Fri</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Sat</span>
+                    </div>
+
+                    <div class="chart-column">
+                        <strong class="attendance-count">0</strong>
+                        <div class="chart-bar" style="height: 0%"></div>
+                        <span>Sun</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="dashboard-card quick-actions">
+                <div class="card-header">
+                    <div>
+                        <h3>Quick Actions</h3>
+                        <p>Frequently used functions</p>
+                    </div>
+                </div>
+
+                <a href="members.html" class="action-button">
+                    <span>👥</span> Manage Members
+                </a>
+
+                <a href="inventory.html" class="action-button">
+                    <span>📦</span> Manage Inventory
+                </a>
+
+                <a href="borrowing-history.html" class="action-button">
+                    <span>📋</span> View Borrowing History
+                </a>
+
+                <a href="attendance.html" class="action-button">
+                    <span>📋</span> View Attendance
+                </a>
+
+                <a href="reservations.html" class="action-button">
+                    <span>🏟️</span> Manage Court Reservations
+                </a>
+
+            
+
+            </div>
+
+        </section>
+
+        <!-- BOTTOM CONTENT -->
+        <section class="dashboard-grid bottom-grid">
+
+            <!-- RECENT ACTIVITIES -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div>
+                        <h3>Recent Activities</h3>
+                        <p>Latest system activities</p>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITIES -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div>
+                        <h3>Recent Activities</h3>
+                        <p>Latest system activities</p>
+                    </div>
+                </div>
+
+                <div id="recentActivities">
+                    <p class="empty-activity">Loading activities...</p>
+                </div>
+            </div>
+
+            </div>
+
+           <!-- MANAGEMENT SUMMARY -->
+<div class="dashboard-card summary-card">
+    <div class="card-header">
+        <div>
+            <h3>Management Summary</h3>
+            <p>Live system overview</p>
+        </div>
+    </div>
+
+    <div class="summary-item">
+        <span>Registered Members</span>
+        <strong id="summaryMembers">0</strong>
+    </div>
+
+    <div class="summary-item">
+        <span>Today's Attendance</span>
+        <strong id="summaryAttendance">0</strong>
+    </div>
+
+    <div class="summary-item">
+        <span>Inventory Records</span>
+        <strong id="summaryInventory">0</strong>
+    </div>
+
+    <div class="summary-item">
+        <span>Active Borrowing Records</span>
+        <strong id="summaryBorrowing">0</strong>
+    </div>
+
+    <div class="summary-item">
+        <span>Confirmed Reservations</span>
+        <strong id="summaryReservations">0</strong>
+    </div>
+
+    <div class="summary-item">
+        <span>System Status</span>
+        <strong class="status-online">● Online</strong>
+    </div>
+</div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="dashboard-footer">
+            <p>© 2026 Finals Pickleball Management System. All rights reserved.</p>
+        </footer>
+
+    </main>
+</div>
+
+<!-- LIVE DASHBOARD STATISTICS -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // READ DATA FROM LOCAL STORAGE
+    function getLocalData(key) {
+        try {
+            const data = localStorage.getItem(key);
+            const parsed = data ? JSON.parse(data) : [];
+
+            return Array.isArray(parsed) ? parsed : [];
+
+        } catch (error) {
+            console.error("Error reading " + key + ":", error);
+            return [];
+        }
+        // UPDATE WHEN A NEW ACTIVITY IS RECORDED IN THE SAME TAB
+    window.addEventListener("pickleActivityUpdated", function() {
+    updateRecentActivities();
+});
+    }
+
+    /* ==========================================
+   RECENT ACTIVITIES
+========================================== */
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => {
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+
+        return entities[character];
+    });
+}
+
+// Convert timestamp into readable time
+function getRelativeTime(timestamp) {
+
+    if (!timestamp) return "Recently";
+
+    const date = new Date(timestamp);
+
+    if (isNaN(date.getTime())) return "Recently";
+
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+
+    if (seconds < 60) return "Just now";
+
+    const minutes = Math.floor(seconds / 60);
+
+    if (minutes < 60) {
+        return minutes + (minutes === 1 ? " minute ago" : " minutes ago");
+    }
+
+    const hours = Math.floor(minutes / 60);
+
+    if (hours < 24) {
+        return hours + (hours === 1 ? " hour ago" : " hours ago");
+    }
+
+    const days = Math.floor(hours / 24);
+
+    if (days < 7) {
+        return days + (days === 1 ? " day ago" : " days ago");
+    }
+
+    return date.toLocaleDateString();
+}
+
+// Display latest five activities
+function updateRecentActivities() {
+
+    const activities = getLocalData("pickleActivities");
+
+    const container = document.getElementById("recentActivities");
+
+    if (!container) return;
+
+    if (activities.length === 0) {
+        container.innerHTML = `
+            <p class="empty-activity">
+                No activities recorded yet.
+            </p>
+        `;
+        return;
+    }
+
+    // Sort newest activities first
+    activities.sort((a, b) => {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+    });
+
+    // Display only the latest five
+    const latestActivities = activities.slice(0, 5);
+
+    container.innerHTML = latestActivities.map(activity => {
+
+        const icon = escapeHTML(activity.icon || "📌");
+        const title = escapeHTML(activity.title || "System Activity");
+        const description = escapeHTML(activity.description || "");
+        const time = escapeHTML(getRelativeTime(activity.timestamp));
+
+        return `
+            <div class="activity-item">
+                <div class="activity-icon">${icon}</div>
+
+                <div>
+                    <strong>${title}</strong>
+                    <p>${description}</p>
+                    <small>${time}</small>
+                </div>
+            </div>
+        `;
+
+    }).join("");
+}
+
+    // GET TODAY'S DATE WITHOUT TIME
+    function getToday() {
+        const today = new Date();
+
+        return new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate()
+        );
+    }
+
+    // PARSE MEMBERSHIP EXPIRATION DATE
+    function parseExpirationDate(dateString) {
+
+        if (!dateString) return null;
+
+        const parts = String(dateString).split("-");
+
+        if (parts.length !== 3) return null;
+
+        const year = Number(parts[0]);
+        const month = Number(parts[1]);
+        const day = Number(parts[2]);
+
+        if (!year || !month || !day) return null;
+
+        const date = new Date(year, month - 1, day);
+
+        if (
+            date.getFullYear() !== year ||
+            date.getMonth() !== month - 1 ||
+            date.getDate() !== day
+        ) {
+            return null;
+        }
+
+        return date;
+    }
+
+
+// WEEKLY ATTENDANCE GRAPH
+function updateWeeklyAttendance() {
+
+    const attendance = getLocalData("pickleAttendance");
+
+    const today = new Date();
+
+    // Get Monday of the current week
+    const monday = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+    );
+
+    const dayOfWeek = monday.getDay();
+
+    monday.setDate(
+        monday.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+    );
+
+    monday.setHours(0, 0, 0, 0);
+
+    // Create attendance counts for Monday to Sunday
+    const weeklyCounts = [0, 0, 0, 0, 0, 0, 0];
+
+    attendance.forEach(record => {
+
+        // Supports common attendance date field names
+        const dateValue =
+            record.checkInDate ||
+            record.date ||
+            record.attendanceDate ||
+            record.checkInTime;
+
+        if (!dateValue) return;
+
+        const attendanceDate = new Date(dateValue);
+
+        if (isNaN(attendanceDate.getTime())) return;
+
+        attendanceDate.setHours(0, 0, 0, 0);
+
+        const difference =
+            Math.round(
+                (attendanceDate - monday) / (1000 * 60 * 60 * 24)
+            );
+
+        // Count only this week's attendance
+        if (difference >= 0 && difference <= 6) {
+            weeklyCounts[difference]++;
+        }
+
+    });
+
+    // Find highest attendance for graph scaling
+    const maxAttendance = Math.max(...weeklyCounts, 1);
+
+    const columns = document.querySelectorAll(
+        "#attendanceChart .chart-column"
+    );
+
+    columns.forEach((column, index) => {
+
+        const count = weeklyCounts[index];
+
+        const percentage = count === 0
+            ? 0
+            : Math.max(5, (count / maxAttendance) * 100);
+
+        column.querySelector(".attendance-count").textContent = count;
+
+        column.querySelector(".chart-bar").style.height =
+            percentage + "%";
+
+    });
+
+    console.log("Weekly attendance updated:", weeklyCounts);
+}
+
+
+    // UPDATE ALL DASHBOARD STATISTICS
+    function updateLiveDashboard() {
+
+        // GET DATA FROM OTHER PAGES
+        const members = getLocalData("pickleballMembers");
+        const attendance = getLocalData("pickleAttendance");
+        const inventory = getLocalData("pickleInventory");
+
+        // 1. TOTAL MEMBERS
+        const totalMembers = members.length;
+
+        // 2. PLAYERS CURRENTLY INSIDE
+        const playersInside = attendance.filter(record => {
+            return !record.checkOutTime;
+        }).length;
+
+        // 3. INVENTORY STOCK QUANTITIES
+        const totalInventoryItems = inventory.reduce((sum, item) => {
+            return sum + Math.max(0, Number(item.quantity) || 0);
+        }, 0);
+
+        const borrowedStock = inventory.reduce((sum, item) => {
+            return sum + Math.max(0, Number(item.borrowed) || 0);
+        }, 0);
+
+        const availableStock = inventory.reduce((sum, item) => {
+            const quantity = Math.max(0, Number(item.quantity) || 0);
+            const borrowed = Math.max(0, Number(item.borrowed) || 0);
+
+            return sum + Math.max(0, quantity - borrowed);
+        }, 0);
+
+        // 4. EXPIRING MEMBERSHIPS
+        // Supports expiryDate, expirationDate, and expiry.
+        // Counts memberships expiring within the next 7 days.
+
+        const today = getToday();
+
+        const expiringMemberships = members.filter(member => {
+
+            const expiry =
+                member.expiryDate ||
+                member.expirationDate ||
+                member.expiry;
+
+            if (!expiry) return false;
+
+            const expiryDate = parseExpirationDate(expiry);
+
+            if (!expiryDate) return false;
+
+            const daysLeft = Math.round(
+                (expiryDate - today) / (1000 * 60 * 60 * 24)
+            );
+
+            return daysLeft >= 0 && daysLeft <= 7;
+
+        }).length;
+
+        // DISPLAY THE STATISTICS
+        document.getElementById("totalMembers").textContent =
+            totalMembers.toLocaleString();
+
+        document.getElementById("playersInside").textContent =
+            playersInside.toLocaleString();
+
+        document.getElementById("inventoryItems").textContent =
+            totalInventoryItems.toLocaleString();
+
+        document.getElementById("availableStock").textContent =
+            availableStock.toLocaleString();
+
+        document.getElementById("borrowedStock").textContent =
+            borrowedStock.toLocaleString();
+
+        document.getElementById("expiringMemberships").textContent =
+            expiringMemberships.toLocaleString();
+
+        console.log("Dashboard statistics updated:", {
+            totalMembers,
+            playersInside,
+            totalInventoryItems,
+            availableStock,
+            borrowedStock,
+            expiringMemberships
+        });
+    }
+
+ /* ==========================================
+   MANAGEMENT SUMMARY
+========================================== */
+
+function updateManagementSummary() {
+
+    // GET DATA FROM LOCAL STORAGE
+    const members = getLocalData("pickleballMembers");
+    const attendance = getLocalData("pickleAttendance");
+    const inventory = getLocalData("pickleInventory");
+    const borrowingHistory = getLocalData("pickleBorrowingHistory");
+    const reservations = getLocalData("pickleReservations");
+
+    // GET TODAY'S DATE
+    const today = new Date().toDateString();
+
+    // 1. REGISTERED MEMBERS
+    const totalMembers = members.length;
+
+    // 2. TODAY'S ATTENDANCE
+    const todayAttendance = attendance.filter(record => {
+
+        const dateValue =
+            record.checkInDate ||
+            record.date ||
+            record.attendanceDate ||
+            record.checkInTime;
+
+        if (!dateValue) return false;
+
+        const attendanceDate = new Date(dateValue);
+
+        return !isNaN(attendanceDate.getTime()) &&
+            attendanceDate.toDateString() === today;
+
+    }).length;
+
+    // 3. INVENTORY RECORDS
+    const totalInventoryRecords = inventory.length;
+
+    // 4. ACTIVE BORROWING RECORDS
+    // Counts transactions with items that have not been fully returned.
+    const activeBorrowingRecords = borrowingHistory.filter(record => {
+
+        const quantity = Math.max(0, Number(record.quantity) || 0);
+        const returned = Math.max(
+            0,
+            Number(record.returnedQuantity) || 0
+        );
+
+        return quantity - returned > 0;
+
+    }).length;
+
+    // 5. CONFIRMED RESERVATIONS
+    const confirmedReservations = reservations.filter(record => {
+        return record.status === "Confirmed";
+    }).length;
+
+    // DISPLAY MANAGEMENT SUMMARY
+    document.getElementById("summaryMembers").textContent =
+        totalMembers.toLocaleString();
+
+    document.getElementById("summaryAttendance").textContent =
+        todayAttendance.toLocaleString();
+
+    document.getElementById("summaryInventory").textContent =
+        totalInventoryRecords.toLocaleString();
+
+    document.getElementById("summaryBorrowing").textContent =
+        activeBorrowingRecords.toLocaleString();
+
+    document.getElementById("summaryReservations").textContent =
+        confirmedReservations.toLocaleString();
+
+    console.log("Management Summary updated:", {
+        totalMembers,
+        todayAttendance,
+        totalInventoryRecords,
+        activeBorrowingRecords,
+        confirmedReservations
+    });
+}
+
+    // INITIAL UPDATE
+    updateLiveDashboard();
+    updateWeeklyAttendance();
+    updateRecentActivities();
+    updateManagementSummary();
+
+    // UPDATE WHEN DATA CHANGES IN ANOTHER TAB
+window.addEventListener("storage", function(event) {
+
+    const dashboardKeys = [
+        "pickleballMembers",
+        "pickleAttendance",
+        "pickleInventory",
+        "pickleBorrowingHistory",
+        "pickleReservations"
+    ];
+
+    if (dashboardKeys.includes(event.key)) {
+        updateLiveDashboard();
+        updateWeeklyAttendance();
+        updateManagementSummary();
+    }
+
+    if (event.key === "pickleActivities") {
+        updateRecentActivities();
+    }
+
+});
+
+    // UPDATE WHEN RETURNING TO THE DASHBOARD
+    window.addEventListener("focus", function() {
+
+    updateLiveDashboard();
+    updateWeeklyAttendance();
+    updateRecentActivities();
+    updateManagementSummary();
+
+});
+    // UPDATE WHEN THE DASHBOARD BECOMES VISIBLE AGAIN
+    document.addEventListener("visibilitychange", function() {
+
+    if (!document.hidden) {
+        updateLiveDashboard();
+        updateWeeklyAttendance();
+        updateRecentActivities();
+        updateManagementSummary();
+    }
+
+});
+
+});
+</script>
+
+</body>
+</html>

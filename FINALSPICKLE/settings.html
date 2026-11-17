@@ -1,0 +1,1262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings | PicklePro</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* SETTINGS DESIGN */
+.settings-welcome {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:26px;
+    background:linear-gradient(120deg,#fff,#f1f6ff);
+    border:1px solid #e5eaf4;
+    border-radius:15px;
+    margin-bottom:25px;
+}
+.settings-welcome h1 {
+    font-size:27px;
+    color:#172554;
+    margin-bottom:7px;
+}
+.settings-welcome p {
+    font-size:13px;
+    color:#718096;
+}
+.settings-eyebrow {
+    font-size:10px;
+    letter-spacing:1.5px;
+    font-weight:800;
+    color:#64748b;
+    margin-bottom:9px;
+}
+.settings-status {
+    background:#ecfdf5;
+    color:#047857;
+    padding:9px 13px;
+    border-radius:30px;
+    font-size:11px;
+    white-space:nowrap;
+}
+.status-dot {
+    display:inline-block;
+    width:7px;
+    height:7px;
+    background:#10b981;
+    border-radius:50%;
+    margin-right:6px;
+}
+
+.settings-layout {
+    display:grid;
+    grid-template-columns:225px minmax(0,1fr);
+    gap:22px;
+    align-items:start;
+}
+.settings-nav {
+    background:white;
+    border:1px solid #e6ebf3;
+    border-radius:13px;
+    padding:14px;
+    position:sticky;
+    top:18px;
+}
+.settings-nav-title {
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:#94a3b8;
+    padding:8px 10px 12px;
+}
+.settings-nav-link {
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:11px 10px;
+    margin:3px 0;
+    text-decoration:none;
+    border-radius:9px;
+    color:#64748b;
+    transition:.2s;
+}
+.settings-nav-link:hover {
+    background:#f8fafc;
+}
+.settings-nav-link.active {
+    background:#eff6ff;
+    color:#2563eb;
+}
+.settings-nav-link .nav-icon {
+    width:30px;
+    height:30px;
+    display:grid;
+    place-items:center;
+    background:#f1f5f9;
+    border-radius:8px;
+}
+.settings-nav-link.active .nav-icon {
+    background:#dbeafe;
+}
+.settings-nav-link strong {
+    display:block;
+    font-size:12px;
+    color:#334155;
+}
+.settings-nav-link small {
+    display:block;
+    font-size:10px;
+    color:#94a3b8;
+    margin-top:3px;
+}
+.settings-nav-link.active strong {
+    color:#1d4ed8;
+}
+.settings-nav-divider {
+    height:1px;
+    background:#edf0f5;
+    margin:12px 4px;
+}
+.settings-nav-link.danger-link strong {
+    color:#dc2626;
+}
+
+.settings-panels {
+    min-width:0;
+}
+.settings-panels .settings-section {
+    margin-bottom:18px;
+    scroll-margin-top:18px;
+}
+.settings-panels .content-card {
+    padding:23px 25px;
+    border:1px solid #e7ebf2;
+    border-radius:14px;
+    background:white;
+    box-shadow:0 5px 18px rgba(15,23,42,.035);
+}
+.settings-section-heading {
+    padding-bottom:15px;
+    margin-bottom:17px;
+    border-bottom:1px solid #edf0f5;
+}
+.settings-section-heading h3 {
+    font-size:15px;
+    font-weight:750;
+    color:#1e293b;
+    margin-bottom:6px;
+}
+.settings-section-heading p {
+    font-size:11px;
+    color:#64748b;
+}
+
+/* FORMS */
+.settings-form-grid {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px 17px;
+}
+.settings-form-group {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+.settings-form-group.full {
+    grid-column:1/-1;
+}
+.settings-form-group label {
+    font-size:11px;
+    font-weight:700;
+    color:#64748b;
+}
+.settings-form-group input,
+.settings-form-group textarea {
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    font-size:12px;
+    font-family:inherit;
+    background:#fbfcfe;
+    color:#1e293b;
+    outline:none;
+}
+.settings-form-group input:focus,
+.settings-form-group textarea:focus {
+    border-color:#3b82f6;
+    box-shadow:0 0 0 3px rgba(59,130,246,.1);
+}
+.settings-form-group textarea {
+    min-height:90px;
+    resize:vertical;
+}
+.settings-actions {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+}
+.settings-primary-btn,
+.settings-secondary-btn,
+.settings-danger-btn,
+.cancel-edit-btn {
+    padding:10px 15px;
+    border:0;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+.settings-primary-btn {
+    background:#2563eb;
+    color:white;
+}
+.settings-primary-btn:hover {
+    background:#1d4ed8;
+}
+.settings-secondary-btn,
+.cancel-edit-btn {
+    background:#f1f5f9;
+    color:#334155;
+    border:1px solid #cbd5e1;
+}
+.settings-danger-btn {
+    background:#ef4444;
+    color:white;
+}
+.settings-danger-btn:hover {
+    background:#dc2626;
+}
+.cancel-edit-btn {
+    display:none;
+}
+.settings-note,
+.club-form-note {
+    font-size:10px;
+    color:#64748b;
+    margin-top:10px;
+    line-height:1.6;
+}
+
+/* CLUBS */
+.club-summary {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+}
+.club-count {
+    background:#eff6ff;
+    color:#2563eb;
+    padding:8px 12px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:700;
+}
+.club-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:15px;
+}
+.club-card {
+    border:1px solid #e2e8f0;
+    border-radius:11px;
+    overflow:hidden;
+    background:white;
+}
+.club-card-header {
+    padding:15px;
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.club-icon {
+    width:43px;
+    height:43px;
+    background:#2563eb;
+    color:white;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    font-size:22px;
+}
+.club-card-header h4 {
+    font-size:14px;
+    color:#1e293b;
+    overflow-wrap:anywhere;
+}
+.club-card-header p {
+    font-size:10px;
+    color:#64748b;
+    margin-top:4px;
+}
+.club-card-body {
+    padding:15px;
+}
+.club-detail {
+    display:flex;
+    gap:9px;
+    font-size:11px;
+    color:#475569;
+    margin-bottom:11px;
+    overflow-wrap:anywhere;
+}
+.club-description {
+    border-top:1px solid #e2e8f0;
+    padding-top:12px;
+    margin-top:12px;
+    font-size:11px;
+    color:#64748b;
+    line-height:1.6;
+}
+.club-card-actions {
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+.club-edit-btn,
+.club-delete-btn {
+    flex:1;
+    border:0;
+    padding:9px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:700;
+}
+.club-edit-btn {
+    background:#eff6ff;
+    color:#2563eb;
+}
+.club-delete-btn {
+    background:#fef2f2;
+    color:#dc2626;
+}
+.club-empty {
+    text-align:center;
+    padding:40px 20px;
+    border:2px dashed #cbd5e1;
+    border-radius:12px;
+}
+.club-empty .empty-icon {
+    font-size:40px;
+    margin-bottom:12px;
+}
+.club-empty h4 {
+    color:#334155;
+    margin-bottom:7px;
+}
+.club-empty p {
+    color:#94a3b8;
+    font-size:12px;
+}
+
+/* NOTIFICATIONS */
+.settings-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:16px 0;
+    border-bottom:1px solid #e2e8f0;
+}
+.settings-row:last-child {
+    border-bottom:none;
+}
+.settings-info h4 {
+    font-size:12px;
+    color:#1e293b;
+    margin-bottom:5px;
+}
+.settings-info p {
+    font-size:11px;
+    color:#64748b;
+    line-height:1.5;
+}
+.settings-switch {
+    position:relative;
+    width:44px;
+    height:24px;
+    flex-shrink:0;
+}
+.settings-switch input {
+    opacity:0;
+    width:0;
+    height:0;
+}
+.settings-slider {
+    position:absolute;
+    inset:0;
+    cursor:pointer;
+    background:#cbd5e1;
+    border-radius:30px;
+    transition:.3s;
+}
+.settings-slider:before {
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    border-radius:50%;
+    transition:.3s;
+}
+.settings-switch input:checked + .settings-slider {
+    background:#3b82f6;
+}
+.settings-switch input:checked + .settings-slider:before {
+    transform:translateX(20px);
+}
+
+/* DANGER */
+.settings-danger .content-card {
+    border:1px solid #fecaca;
+    background:#fffdfd;
+}
+.settings-danger .settings-section-heading h3 {
+    color:#dc2626;
+}
+
+/* ABOUT */
+.settings-meta {
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+}
+.settings-meta span {
+    background:#f1f5f9;
+    color:#475569;
+    padding:8px 10px;
+    border-radius:7px;
+    font-size:10px;
+}
+
+/* TOAST */
+.settings-toast {
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#2563eb;
+    color:white;
+    padding:13px 20px;
+    border-radius:9px;
+    display:none;
+    z-index:9999;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    font-size:12px;
+}
+.settings-toast.show {
+    display:block;
+}
+
+/* DARK MODE */
+body.dark-mode .settings-welcome,
+body.dark-mode .settings-nav,
+body.dark-mode .settings-panels .content-card {
+    background:#192438;
+    border-color:#334155;
+}
+body.dark-mode .settings-welcome h1,
+body.dark-mode .settings-section-heading h3,
+body.dark-mode .settings-info h4,
+body.dark-mode .club-empty h4 {
+    color:#f1f5f9;
+}
+body.dark-mode .settings-welcome p,
+body.dark-mode .settings-section-heading p,
+body.dark-mode .settings-info p,
+body.dark-mode .settings-note,
+body.dark-mode .club-form-note {
+    color:#94a3b8;
+}
+body.dark-mode .settings-nav-link strong {
+    color:#e2e8f0;
+}
+body.dark-mode .settings-nav-link small {
+    color:#94a3b8;
+}
+body.dark-mode .settings-nav-link.active {
+    background:#1e3a5f;
+}
+body.dark-mode .settings-nav-link.active strong {
+    color:#93c5fd;
+}
+body.dark-mode .settings-nav-link .nav-icon {
+    background:#26364d;
+}
+body.dark-mode .settings-section-heading,
+body.dark-mode .settings-row,
+body.dark-mode .club-description {
+    border-color:#334155;
+}
+body.dark-mode .settings-form-group label,
+body.dark-mode .club-detail,
+body.dark-mode .club-description {
+    color:#cbd5e1;
+}
+body.dark-mode .settings-form-group input,
+body.dark-mode .settings-form-group textarea {
+    background:#111c2e;
+    color:#f1f5f9;
+    border-color:#475569;
+}
+body.dark-mode .club-card {
+    background:#192438;
+    border-color:#334155;
+}
+body.dark-mode .club-card-header {
+    background:linear-gradient(135deg,#1e3a5f,#1e40af);
+}
+body.dark-mode .club-card-header h4 {
+    color:#f1f5f9;
+}
+body.dark-mode .club-card-header p {
+    color:#cbd5e1;
+}
+body.dark-mode .club-count,
+body.dark-mode .settings-meta span {
+    background:#1e3a5f;
+    color:#93c5fd;
+}
+body.dark-mode .settings-danger .content-card {
+    background:#241d27;
+    border-color:#7f1d1d;
+}
+body.dark-mode .settings-secondary-btn,
+body.dark-mode .cancel-edit-btn {
+    background:#334155;
+    color:#f1f5f9;
+    border-color:#475569;
+}
+
+@media(max-width:900px) {
+    .settings-layout {
+        grid-template-columns:1fr;
+    }
+    .settings-nav {
+        position:static;
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .settings-nav-title,
+    .settings-nav-divider {
+        grid-column:1/-1;
+    }
+}
+@media(max-width:600px) {
+    .settings-welcome {
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px;
+    }
+    .settings-status {
+        white-space:normal;
+    }
+    .settings-form-grid {
+        grid-template-columns:1fr;
+    }
+    .settings-form-group.full {
+        grid-column:auto;
+    }
+    .settings-panels .content-card {
+        padding:17px;
+    }
+    .settings-nav {
+        grid-template-columns:1fr 1fr;
+        padding:9px;
+    }
+    .settings-nav-link {
+        padding:9px 6px;
+    }
+    .settings-nav-link small {
+        display:none;
+    }
+    .settings-row {
+        align-items:flex-start;
+    }
+    .club-grid {
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="logo">
+        <div class="logo-icon">🏓</div>
+        <div>
+            <h2>PicklePro</h2>
+            <small>Management System</small>
+        </div>
+    </div>
+
+    <nav>
+        <p class="nav-label">MAIN MENU</p>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="members.html">👥 Members</a>
+        <a href="inventory.html">📦 Inventory</a>
+        <a href="attendance.html">📝 Attendance</a>
+
+        <p class="nav-label">PREFERENCES</p>
+        <a href="settings.html" class="active">⚙️ Settings</a>
+        <a href="profile.html">👤 My Profile</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <p>Finals 2026</p>
+        <small>Pickleball Management System</small>
+    </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+    <div>
+        <h2>Settings</h2>
+        <p>Manage your system preferences.</p>
+    </div>
+
+    <div class="admin-info">
+        <button class="theme-btn" id="themeToggle" type="button">🌙</button>
+        <div class="admin-avatar">A</div>
+        <div>
+            <strong>Administrator</strong>
+            <small>System Admin</small>
+        </div>
+    </div>
+</header>
+
+<section class="page-content">
+
+<!-- INTRO -->
+<div class="settings-welcome">
+    <div>
+        <div class="settings-eyebrow">PICKLEPRO / PREFERENCES</div>
+        <h1>Settings</h1>
+        <p>Personalize your workspace and manage how PicklePro works.</p>
+    </div>
+
+    <div class="settings-status">
+        <span class="status-dot"></span>
+        Your settings are stored in this browser
+    </div>
+</div>
+
+<div class="settings-layout">
+
+<!-- SETTINGS NAVIGATION -->
+<aside class="settings-nav">
+    <p class="settings-nav-title">SETTINGS MENU</p>
+
+    <a class="settings-nav-link active" href="#generalSettings">
+        <span class="nav-icon">⚙️</span>
+        <span><strong>General</strong><small>Club details</small></span>
+    </a>
+
+    <a class="settings-nav-link" href="#clubDirectory">
+        <span class="nav-icon">🏓</span>
+        <span><strong>Clubs</strong><small>Manage clubs</small></span>
+    </a>
+
+    <a class="settings-nav-link" href="#notificationSettings">
+        <span class="nav-icon">🔔</span>
+        <span><strong>Notifications</strong><small>Notification preferences</small></span>
+    </a>
+
+    <a class="settings-nav-link" href="#aboutSettings">
+        <span class="nav-icon">ⓘ</span>
+        <span><strong>About</strong><small>System information</small></span>
+    </a>
+
+    <div class="settings-nav-divider"></div>
+
+    <a class="settings-nav-link danger-link" href="#dangerSettings">
+        <span class="nav-icon">⚠️</span>
+        <span><strong>Danger Zone</strong><small>Reset system data</small></span>
+    </a>
+</aside>
+
+<!-- SETTINGS CONTENT -->
+<div class="settings-panels">
+
+<!-- GENERAL -->
+<section class="settings-section" id="generalSettings">
+<div class="content-card">
+
+    <div class="settings-section-heading">
+        <h3>🏓 Club Information</h3>
+        <p>Create and manage your pickleball clubs.</p>
+    </div>
+
+    <form id="clubForm">
+        <div class="settings-form-grid">
+
+            <div class="settings-form-group">
+                <label for="clubName">Club Name *</label>
+                <input type="text" id="clubName" placeholder="Enter club name" required>
+            </div>
+
+            <div class="settings-form-group">
+                <label for="clubEmail">Club Email *</label>
+                <input type="email" id="clubEmail" placeholder="Enter email address" required>
+            </div>
+
+            <div class="settings-form-group">
+                <label for="clubPhone">Contact Number *</label>
+                <input type="tel" id="clubPhone" placeholder="Enter contact number" required>
+            </div>
+
+            <div class="settings-form-group">
+                <label for="clubLocation">Club Location *</label>
+                <input type="text" id="clubLocation" placeholder="Enter club location" required>
+            </div>
+
+            <div class="settings-form-group full">
+                <label for="clubDescription">Description</label>
+                <textarea id="clubDescription" placeholder="Enter club description"></textarea>
+            </div>
+
+        </div>
+
+        <div class="settings-actions">
+            <button type="submit" class="settings-primary-btn" id="clubSubmitBtn">
+                + Create Club
+            </button>
+
+            <button type="button" class="cancel-edit-btn" id="cancelEdit">
+                Cancel Edit
+            </button>
+        </div>
+
+        <p class="club-form-note">* Required fields.</p>
+    </form>
+
+</div>
+</section>
+
+<!-- CLUB DIRECTORY -->
+<section class="settings-section" id="clubDirectory">
+<div class="content-card">
+
+    <div class="club-summary">
+        <div class="settings-section-heading" style="margin:0">
+            <h3>📋 Created Clubs</h3>
+            <p>View and manage all registered clubs.</p>
+        </div>
+
+        <div class="club-count" id="clubCount">0 Clubs</div>
+    </div>
+
+    <div class="club-grid" id="clubList"></div>
+
+</div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section class="settings-section" id="notificationSettings">
+<div class="content-card">
+
+    <div class="settings-section-heading">
+        <h3>🔔 Notifications</h3>
+        <p>Choose which system notifications you want enabled.</p>
+    </div>
+
+    <div class="settings-row">
+        <div class="settings-info">
+            <h4>New Member Notifications</h4>
+            <p>Updates when a new member is added.</p>
+        </div>
+        <label class="settings-switch">
+            <input type="checkbox" id="memberNotification" checked>
+            <span class="settings-slider"></span>
+        </label>
+    </div>
+
+    <div class="settings-row">
+        <div class="settings-info">
+            <h4>Attendance Notifications</h4>
+            <p>Updates about attendance records.</p>
+        </div>
+        <label class="settings-switch">
+            <input type="checkbox" id="attendanceNotification" checked>
+            <span class="settings-slider"></span>
+        </label>
+    </div>
+
+    <div class="settings-row">
+        <div class="settings-info">
+            <h4>Inventory Notifications</h4>
+            <p>Updates about inventory records.</p>
+        </div>
+        <label class="settings-switch">
+            <input type="checkbox" id="inventoryNotification" checked>
+            <span class="settings-slider"></span>
+        </label>
+    </div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="settings-section" id="aboutSettings">
+<div class="content-card">
+
+    <div class="settings-section-heading">
+        <h3>ℹ️ About PicklePro</h3>
+        <p>Application and system information.</p>
+    </div>
+
+    <div class="settings-meta">
+        <span>Application: PicklePro</span>
+        <span>Edition: Finals 2026</span>
+        <span>Version: 1.0</span>
+        <span id="storageStatus">Storage: Checking...</span>
+    </div>
+
+    <p class="settings-note">
+        PicklePro Management System helps manage pickleball club members,
+        attendance, inventory and other records.
+    </p>
+
+</div>
+</section>
+
+<!-- DANGER ZONE -->
+<section class="settings-section settings-danger" id="dangerSettings">
+<div class="content-card">
+
+    <div class="settings-section-heading">
+        <h3>⚠ Danger Zone</h3>
+        <p>These actions can affect your saved system data.</p>
+    </div>
+
+    <div class="settings-row">
+        <div class="settings-info">
+            <h4>Reset Preferences</h4>
+            <p>Restore theme and notification preferences to default.</p>
+        </div>
+        <button class="settings-secondary-btn" id="resetSettings" type="button">
+            Reset Preferences
+        </button>
+    </div>
+
+    <div class="settings-row">
+        <div class="settings-info">
+            <h4>Clear All System Data</h4>
+            <p>Delete selected locally saved member, attendance and inventory records.</p>
+        </div>
+        <button class="settings-danger-btn" id="clearData" type="button">
+            Clear Local Data
+        </button>
+    </div>
+
+    <p class="settings-note">
+        This only deletes the browser storage keys specified in the script.
+        It does not delete Supabase records.
+    </p>
+
+</div>
+</section>
+
+</div>
+</div>
+</section>
+
+<footer class="footer">
+    © 2026 PicklePro. Pickleball Management System.
+</footer>
+
+</main>
+</div>
+
+<div class="settings-toast" id="toast"></div>
+
+<script>
+(() => {
+"use strict";
+
+const CLUB_KEY = "pickleClubs";
+const OLD_CLUB_KEY = "pickleClubInfo";
+const NOTIFICATIONS_KEY = "pickleNotificationSettings";
+const THEME_KEY = "pickleTheme";
+
+const DATA_KEYS = [
+    "pickleMembers",
+    "members",
+    "pickleAttendance",
+    "attendance",
+    "pickleInventory",
+    "inventory",
+    "pickleEquipment",
+    "pickleAnnouncements"
+];
+
+const BACKUP_KEYS = [
+    ...new Set([
+        ...DATA_KEYS,
+        CLUB_KEY,
+        OLD_CLUB_KEY,
+        NOTIFICATIONS_KEY,
+        THEME_KEY
+    ])
+];
+
+let editingClubId = null;
+let toastTimer;
+
+const $ = id => document.getElementById(id);
+
+// TOAST
+function showToast(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2800);
+}
+
+// STORAGE
+function readStorage(key, fallback) {
+    try {
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : JSON.parse(value);
+    } catch {
+        return fallback;
+    }
+}
+
+function writeStorage(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+    } catch {
+        showToast("Unable to save. Browser storage may be full.");
+        return false;
+    }
+}
+
+// CLUB MANAGEMENT
+function getClubs() {
+    const saved = readStorage(CLUB_KEY, null);
+
+    if (Array.isArray(saved)) return saved;
+
+    const oldClub = readStorage(OLD_CLUB_KEY, null);
+
+    if (oldClub && oldClub.name) {
+        const migrated = [{
+            id: Date.now(),
+            name: oldClub.name,
+            email: oldClub.email || "",
+            phone: oldClub.phone || "",
+            location: oldClub.location || "",
+            description: oldClub.description || ""
+        }];
+
+        writeStorage(CLUB_KEY, migrated);
+        return migrated;
+    }
+
+    return [];
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[char]);
+}
+
+function renderClubs() {
+    const clubs = getClubs();
+
+    $("clubCount").textContent =
+        clubs.length + (clubs.length === 1 ? " Club" : " Clubs");
+
+    if (!clubs.length) {
+        $("clubList").innerHTML = `
+            <div class="club-empty" style="grid-column:1/-1">
+                <div class="empty-icon">🏓</div>
+                <h4>No Clubs Created Yet</h4>
+                <p>Create your first pickleball club using the form above.</p>
+            </div>
+        `;
+        return;
+    }
+
+    $("clubList").innerHTML = clubs.map(club => `
+        <div class="club-card">
+            <div class="club-card-header">
+                <div class="club-icon">🏓</div>
+                <div>
+                    <h4>${escapeHTML(club.name)}</h4>
+                    <p>PicklePro Registered Club</p>
+                </div>
+            </div>
+
+            <div class="club-card-body">
+                <div class="club-detail">📧 ${escapeHTML(club.email)}</div>
+                <div class="club-detail">📞 ${escapeHTML(club.phone)}</div>
+                <div class="club-detail">📍 ${escapeHTML(club.location)}</div>
+
+                <div class="club-description">
+                    ${club.description
+                        ? escapeHTML(club.description)
+                        : "No description provided."}
+                </div>
+
+                <div class="club-card-actions">
+                    <button class="club-edit-btn"
+                        data-action="edit"
+                        data-id="${Number(club.id)}">
+                        ✏️ Edit
+                    </button>
+
+                    <button class="club-delete-btn"
+                        data-action="delete"
+                        data-id="${Number(club.id)}">
+                        🗑 Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join("");
+}
+
+function resetClubForm() {
+    $("clubForm").reset();
+    editingClubId = null;
+    $("clubSubmitBtn").textContent = "+ Create Club";
+    $("cancelEdit").style.display = "none";
+}
+
+$("clubForm").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const club = {
+        name: $("clubName").value.trim(),
+        email: $("clubEmail").value.trim(),
+        phone: $("clubPhone").value.trim(),
+        location: $("clubLocation").value.trim(),
+        description: $("clubDescription").value.trim()
+    };
+
+    if (!club.name || !club.email || !club.phone || !club.location) {
+        showToast("Please complete all required fields.");
+        return;
+    }
+
+    let clubs = getClubs();
+
+    if (editingClubId !== null) {
+        clubs = clubs.map(item =>
+            item.id === editingClubId ? {...item, ...club} : item
+        );
+    } else {
+        club.id = Date.now();
+        clubs.push(club);
+    }
+
+    if (writeStorage(CLUB_KEY, clubs)) {
+        showToast(
+            editingClubId !== null
+                ? "Club updated successfully!"
+                : "Club created successfully!"
+        );
+
+        resetClubForm();
+        renderClubs();
+    }
+});
+
+// EDIT AND DELETE CLUBS
+$("clubList").addEventListener("click", event => {
+    const button = event.target.closest("button[data-action]");
+
+    if (!button) return;
+
+    const id = Number(button.dataset.id);
+    let clubs = getClubs();
+
+    const club = clubs.find(item => Number(item.id) === id);
+
+    if (!club) return;
+
+    if (button.dataset.action === "edit") {
+        editingClubId = id;
+
+        $("clubName").value = club.name || "";
+        $("clubEmail").value = club.email || "";
+        $("clubPhone").value = club.phone || "";
+        $("clubLocation").value = club.location || "";
+        $("clubDescription").value = club.description || "";
+
+        $("clubSubmitBtn").textContent = "Save Club Changes";
+        $("cancelEdit").style.display = "inline-block";
+
+        $("clubForm").scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+        showToast("Editing club information.");
+    }
+
+    if (button.dataset.action === "delete") {
+        if (!confirm(`Delete "${club.name}"?`)) return;
+
+        clubs = clubs.filter(item => Number(item.id) !== id);
+
+        if (writeStorage(CLUB_KEY, clubs)) {
+            if (editingClubId === id) resetClubForm();
+
+            renderClubs();
+            showToast("Club deleted successfully.");
+        }
+    }
+});
+
+$("cancelEdit").addEventListener("click", () => {
+    resetClubForm();
+    showToast("Editing cancelled.");
+});
+
+// NOTIFICATIONS - AUTOMATIC SAVE
+
+function loadNotifications() {
+    const saved = readStorage(NOTIFICATIONS_KEY, {
+        members: true,
+        attendance: true,
+        inventory: true
+    });
+
+    $("memberNotification").checked = saved.members !== false;
+    $("attendanceNotification").checked = saved.attendance !== false;
+    $("inventoryNotification").checked = saved.inventory !== false;
+}
+
+function saveNotifications() {
+    const settings = {
+        members: $("memberNotification").checked,
+        attendance: $("attendanceNotification").checked,
+        inventory: $("inventoryNotification").checked
+    };
+
+    if (writeStorage(NOTIFICATIONS_KEY, settings)) {
+        showToast("Notification preference updated!");
+    }
+}
+
+$("memberNotification").addEventListener("change", saveNotifications);
+$("attendanceNotification").addEventListener("change", saveNotifications);
+$("inventoryNotification").addEventListener("change", saveNotifications);
+// DARK MODE
+function applyTheme(isDark) {
+    document.body.classList.toggle("dark-mode", isDark);
+    $("themeToggle").textContent = isDark ? "☀️" : "🌙";
+}
+
+function loadTheme() {
+    applyTheme(localStorage.getItem(THEME_KEY) === "dark");
+}
+
+$("themeToggle").addEventListener("click", () => {
+    const isDark = !document.body.classList.contains("dark-mode");
+
+    localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+
+    applyTheme(isDark);
+});
+
+// RESET SETTINGS
+$("resetSettings").addEventListener("click", () => {
+    if (!confirm(
+        "Reset theme and notification preferences? Your clubs and other records will remain."
+    )) return;
+
+    localStorage.removeItem(NOTIFICATIONS_KEY);
+    localStorage.setItem(THEME_KEY, "light");
+
+    loadNotifications();
+    loadTheme();
+
+    showToast("Preferences restored to defaults.");
+});
+
+// CLEAR LOCAL DATA
+$("clearData").addEventListener("click", () => {
+    const confirmation = prompt(
+        'This deletes selected local browser records. Type DELETE to confirm:'
+    );
+
+    if (confirmation !== "DELETE") {
+        if (confirmation !== null) {
+            showToast("Confirmation did not match. Nothing was deleted.");
+        }
+        return;
+    }
+
+    DATA_KEYS.forEach(key => localStorage.removeItem(key));
+
+    showToast("Selected local data cleared.");
+});
+
+// STORAGE STATUS
+function checkStorage() {
+    try {
+        const key = "__picklepro_test__";
+
+        localStorage.setItem(key,"ok");
+        localStorage.removeItem(key);
+
+        $("storageStatus").textContent = "Storage: Available";
+    } catch {
+        $("storageStatus").textContent = "Storage: Unavailable";
+    }
+}
+
+// SETTINGS NAVIGATION ACTIVE STATE
+const navLinks = document.querySelectorAll(".settings-nav-link");
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.forEach(item => item.classList.remove("active"));
+        link.classList.add("active");
+    });
+});
+
+// INITIALIZE
+renderClubs();
+loadNotifications();
+loadTheme();
+checkStorage();
+
+})();
+</script>
+
+</body>
+</html>
