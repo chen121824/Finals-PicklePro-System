@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../config/database.php";
+    include "../config/dashboard.php";
     //only admin can acccess this page
     if(!isset($_SESSION["role"]) || $_SESSION ["role"] != "admin") {
         header("Location: ../index.php");
